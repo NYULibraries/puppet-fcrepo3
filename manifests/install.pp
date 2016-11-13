@@ -27,15 +27,32 @@ class fedora_repository::install (
   $user_ensure      = $fedora_repository::params::user_ensure,
 ) inherits fedora_repository::params {
 
-  # Download the artifact
-  remote_artifact{"${stage_dir}/${artifact_id}-${version}.jar":
-    artifact_id     => $artifact_id,
-    group_id        => $group_id,
-    nexus_server    => $nexus_server,
-    nexus_port      => $nexus_port,
-    timeout         => $timeout,
-    version         => $version,
-    remote_location => "http://${nexus_server}:${nexus_port}/nexus/service/local/artifact/maven/redirect?r=central&g=${group_id}&a=${artifact_id}&v=${version}",
+  ## Download the artifact
+  ##
+  #   If $nexus_server is defined get the artifact from the local
+  #   nexus mirror, otherwise get it from maven central
+  ##
+  if $nexus_server == undef {
+    remote_artifact{ "${stage_dir}/${artifact_id}-${version}.jar" :
+      artifact_id     => $artifact_id,
+      group_id        => $group_id,
+      nexus_server    => $nexus_server,
+      nexus_port      => $nexus_port,
+      timeout         => $timeout,
+      version         => $version,
+      remote_location => "http://central.maven.org/maven2/org/fcrepo/${artifact_id}/${version}/${artifact_id}-${version}.jar"
+    }
+  }
+  else {
+    remote_artifact{ "${stage_dir}/${artifact_id}-${version}.jar" :
+      artifact_id     => $artifact_id,
+      group_id        => $group_id,
+      nexus_server    => $nexus_server,
+      nexus_port      => $nexus_port,
+      timeout         => $timeout,
+      version         => $version,
+      remote_location => "http://${nexus_server}:${nexus_port}/nexus/service/local/artifact/maven/redirect?r=central&g=${group_id}&a=${artifact_id}&v=${version}",
+    }
   }
 
   # Install
