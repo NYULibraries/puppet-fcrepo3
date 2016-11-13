@@ -22,6 +22,7 @@
 #
 class fedora_repository (
   $installed = $fedora_repository::params::installed,
+  $nexus_server = $fedora_repository::params::nexus_server,
 ) inherits fedora_repository::params {
 
   class { fedora_repository::user :
@@ -29,5 +30,6 @@ class fedora_repository (
   }
   include fedora_repository::user
   include fedora_repository::install
+  include fedora_repository::service
 
 }
