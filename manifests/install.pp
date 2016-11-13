@@ -55,7 +55,16 @@ class fedora_repository::install (
     }
   }
 
-  # Install
+  #  load the config file
+  file { "${stage_dir}/install.properties" :
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0600',
+    source => "puppet:///modules/${module_name}/install.properties.3.7.1",
+  }
+
+  # Install fedora
   exec { "${artifact_id}-${version}" :
     cwd       => $install_dir,
     command   => "/etc/alternatives/java -jar ${stage_dir}/${artifact_id}-${version}.jar ${stage_dir}/install.properties",
@@ -68,4 +77,5 @@ class fedora_repository::install (
     logoutput => true,
     require   => Class['java'],
   }
+
 }
