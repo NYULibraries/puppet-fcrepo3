@@ -1,0 +1,15 @@
+{
+  "name": "NYULibraries/fedora_repository",
+  "version": "0.1.0",
+  "author": "Flannon Jackson",
+  "summary": "Manage fedora repo",
+  "license": "Apache 2.0",
+  "source": "https://github.com/NYULibraries/fedora_repository",
+  "project_page": "https://github.com/NYULibraries/fedora_repository",
+  "issues_url": "https://github.com/NYULibraries/fedora_repository/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
+    {"name":"puppetlabs-java","version_requirement":">= 1.6.0"}
+  ]
+}
+
