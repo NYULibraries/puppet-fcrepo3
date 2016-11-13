@@ -66,16 +66,16 @@ class fedora_repository::install (
 
   # Install fedora
   exec { "${artifact_id}-${version}" :
-    cwd       => $install_dir,
-    command   => "/etc/alternatives/java -jar ${stage_dir}/${artifact_id}-${version}.jar ${stage_dir}/install.properties",
-    creates   => "${install_dir}/tomcat",
-    #environment => ["JAVA_HOME=/etc/alternatives/java", "FEDORA_HOME=${install_dir}","CATALINA_HOME=$INSTALL_DIR}/tomcat"],
-    timeout   => '300',
-    tries     => '5',
-    try_sleep => '5',
-    user      => $user,
-    logoutput => true,
-    require   => Class['java'],
+    cwd        => $stage_dir,
+    command     => "/etc/alternatives/java -jar ${stage_dir}/${artifact_id}-${version}.jar ${stage_dir}/install.properties",
+    creates     => "${install_dir}/tomcat",
+    #environment => ["JAVA_HOME=/etc/alternatives/java", "FEDORA_HOME=${install_dir}","CATALINA_HOME=${INSTALL_DIR}/tomcat"],
+    timeout     => '0',
+    tries       => '5',
+    try_sleep   => '5',
+    user        => $user,
+    logoutput   => true,
+    require     => Class['java'],
   }
 
 }
