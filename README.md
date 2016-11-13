@@ -43,12 +43,25 @@ etc.), mention it here.
 
 ### Beginning with fedora_repo
 
+
+## Usage
+
 To install Fedora3.
 
     include fedora_repository
 
-## Usage
+By default this will install fedora 3.7.1, retrieving the artifact from MAven Central. To install Fedora 3.8 you can do the following,
 
+    class { 'fedora_repository' :
+      version => '3.8.1',
+    }
+
+To pull the artifact from a local Nexus server,
+
+    class { 'fedora_repository' :
+      nexus_server => 'nexus.example.edu',
+      nexus_port   => '8081',
+    }
 
 ## Reference
 
