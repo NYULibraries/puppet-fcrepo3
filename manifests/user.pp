@@ -18,12 +18,15 @@ class fedora_repository::user (
 
   user { $user :
     ensure     => $installed,
-    home       => $install_dir,
+    #home       => $install_dir,
     managehome => true,
   }
 
-  file { $install_dir :
-    mode => '0755',
-  }
+  #file { $install_dir :
+  #  ensure => directory,
+  #  owner  => $user,
+  #  group  => $user,
+  #  mode   => '0755',
+  #}
 
 }
