@@ -25,11 +25,11 @@ class fedora_repository (
   $nexus_server = $fedora_repository::params::nexus_server,
 ) inherits fedora_repository::params {
 
-  class { fedora_repository::user :
-    installed => $installed,
-  }
+  #class { fedora_repository::user :
+  #  installed => $installed,
+  #}
   include fedora_repository::user
   include fedora_repository::install
-  include fedora_repository::service
+  #include fedora_repository::service
 
 }
