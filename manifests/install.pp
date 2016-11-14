@@ -27,6 +27,12 @@ class fedora_repository::install (
   $user_ensure      = $fedora_repository::params::user_ensure,
 ) inherits fedora_repository::params {
 
+  file { $install_dir :
+    ensure => directory,
+    #owner  => $user,
+    #group  => $user,
+    mode   => '0755',
+  }
   ## Download the artifact
   ##
   #   If $nexus_server is defined get the artifact from the local
@@ -58,24 +64,29 @@ class fedora_repository::install (
   #  load the config file
   file { "${stage_dir}/install.properties" :
     ensure => present,
-    owner  => 'root',
-    group  => 'root',
+    owner  => $user,
+    group  => $user,
     mode   => '0600',
     source => "puppet:///modules/${module_name}/install.properties.3.7.1",
   }
 
   # Install fedora
   exec { "${artifact_id}-${version}" :
-    cwd        => $stage_dir,
-    command     => "/etc/alternatives/java -jar ${stage_dir}/${artifact_id}-${version}.jar ${stage_dir}/install.properties",
+    #cwd        => $stage_dir,
+    cwd         => '/tmp',
+    command    => "/etc/alternatives/java -jar ${stage_dir}/${artifact_id}-${version}.jar ${stage_dir}/install.properties",
+    #command     => "/etc/alternatives/java -jar /tmp/fcrepo-installer-3.7.1.jar /tmp/install.properties",
     creates     => "${install_dir}/tomcat",
-    #environment => ["JAVA_HOME=/etc/alternatives/java", "FEDORA_HOME=${install_dir}","CATALINA_HOME=${INSTALL_DIR}/tomcat"],
-    timeout     => '0',
-    tries       => '5',
+    environment => ["JAVA_HOME=/etc/alternatives/java", "FEDORA_HOME=${install_dir}","CATALINA_HOME=${INSTALL_DIR}/tomcat"],
+    timeout     => '300',
+    tries       => '3',
     try_sleep   => '5',
-    user        => $user,
+    #user       => $user,
+    user        => 'root',
     logoutput   => true,
+    #require    => [ Class['java'], File["${install_dir}"] ],
     require     => Class['java'],
+    #require     => Java::Oracle['jfk8'],
   }
 
 }
