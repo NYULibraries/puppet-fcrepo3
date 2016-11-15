@@ -17,9 +17,10 @@ class fedora_repository::user (
 ) inherits fedora_repository::params {
 
   user { $user :
-    ensure     => $installed,
-    #home       => $install_dir,
-    managehome => true,
+    ensure      => $installed,
+    comment     => 'Fedora system user',
+    home        => $install_dir,
+    #managehome => true,
   }
 
   #file { $install_dir :
