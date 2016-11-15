@@ -18,5 +18,6 @@
   # Description:       Start the Fedora3 repostiory service
   ### END INIT INFO
 
+  export FEDORA_HOME="<%= @install_dir %>"
   export TOMCAT_USER="<%= @user %>"
   /opt/<%= @user %>/tomcat/bin/startup.sh ${1+"$@"}
