@@ -14,7 +14,6 @@ class fedora_repository::params {
   $artifact_id      = 'fcrepo-installer'
   $group_id         = 'org.fcrepo'
   $installed        = 'present'
-  #$nexus_server     = '172.28.128.11'
   $nexus_server     = undef
   $nexus_port       = '8081'
   $stage_dir        = '/tmp'
