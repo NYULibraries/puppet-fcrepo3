@@ -23,6 +23,7 @@
 class fedora_repository (
   $installed = $fedora_repository::params::installed,
   $nexus_server = $fedora_repository::params::nexus_server,
+  $version = $fedora_repository::params::version,
 ) inherits fedora_repository::params {
 
   #class { fedora_repository::user :
