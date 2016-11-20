@@ -15,6 +15,7 @@
 # wget "http://172.28.128.11:8081/nexus/service/local/artifact/maven/content?r=central&g=org.fcrepo&a=fcrepo-installer&v=3.7.1" --content-disposition
 #
 class fedora_repository::install (
+  $comment          = $fedora_repository::params::comment,
   $group_id         = $fedora_repository::params::group_id,
   $artifact_id      = $fedora_repository::params::artifact_id,
   $version          = $fedora_repository::params::version,
@@ -27,38 +28,43 @@ class fedora_repository::install (
   $user_ensure      = $fedora_repository::params::user_ensure,
 ) inherits fedora_repository::params {
 
+  # add the user
+  #user { $user :
+  #  ensure  => $installed,
+  #  comment => $comment,
+  #  home    => $install_dir,
+  #}
+
   file { $install_dir :
-    ensure => directory,
-    #owner  => $user,
-    #group  => $user,
-    mode   => '0755',
+    #ensure  => directory,
+    #owner => $user,
+    #owner => $user,
+    group => 'root',
+    group => 'root',
   }
+
+
   ## Download the artifact
   ##
   #   If $nexus_server is defined get the artifact from the local
   #   nexus mirror, otherwise get it from maven central
   ##
-  if $nexus_server == undef {
-    remote_artifact{ "${stage_dir}/${artifact_id}-${version}.jar" :
-      artifact_id     => $artifact_id,
-      group_id        => $group_id,
-      nexus_server    => $nexus_server,
-      nexus_port      => $nexus_port,
-      timeout         => $timeout,
-      version         => $version,
-      remote_location => "http://central.maven.org/maven2/org/fcrepo/${artifact_id}/${version}/${artifact_id}-${version}.jar"
+  if $::nexue_server == undef {
+    $remote_location = "http://central.maven.org/maven2/org/fcrepo/${artifact_id}/${version}/${artifact_id}-${version}.jar"
+    #$remote_location = "http://central.maven.org/maven2/org/fcrepo/fcrepo-installer/3.7.1/fcrepo-installer-3.7.1.jar"
     }
-  }
-  else {
-    remote_artifact{ "${stage_dir}/${artifact_id}-${version}.jar" :
-      artifact_id     => $artifact_id,
-      group_id        => $group_id,
-      nexus_server    => $nexus_server,
-      nexus_port      => $nexus_port,
-      timeout         => $timeout,
-      version         => $version,
-      remote_location => "http://${nexus_server}:${nexus_port}/nexus/service/local/artifact/maven/redirect?r=central&g=${group_id}&a=${artifact_id}&v=${version}",
+    else {
+      $remote_location = "http://${nexus_server}:${nexus_port}/nexus/service/local/artifact/maven/redirect?r=central&g=${group_id}&a=${artifact_id}&v=${version}"
     }
+
+  remote_artifact{ "${stage_dir}/${artifact_id}-${version}.jar" :
+    artifact_id     => $artifact_id,
+    group_id        => $group_id,
+    nexus_server    => $nexus_server,
+    nexus_port      => $nexus_port,
+    timeout         => $timeout,
+    version         => $version,
+    remote_location => $remote_location,
   }
 
   #  load the config file
@@ -74,10 +80,10 @@ class fedora_repository::install (
   exec { "${artifact_id}-${version}" :
     #cwd        => $stage_dir,
     cwd         => '/tmp',
-    command    => "/etc/alternatives/java -jar ${stage_dir}/${artifact_id}-${version}.jar ${stage_dir}/install.properties",
+    command     => "/etc/alternatives/java -jar ${stage_dir}/${artifact_id}-${version}.jar ${stage_dir}/install.properties",
     #command     => "/etc/alternatives/java -jar /tmp/fcrepo-installer-3.7.1.jar /tmp/install.properties",
     creates     => "${install_dir}/tomcat",
-    environment => ["JAVA_HOME=/etc/alternatives/java", "FEDORA_HOME=${install_dir}","CATALINA_HOME=${INSTALL_DIR}/tomcat"],
+    environment => ['JAVA_HOME=/etc/alternatives/java', "FEDORA_HOME=${install_dir}","CATALINA_HOME=${install_dir}/tomcat"],
     timeout     => '300',
     tries       => '3',
     try_sleep   => '5',
@@ -88,5 +94,13 @@ class fedora_repository::install (
     require     => Class['java'],
     #require     => Java::Oracle['jfk8'],
   }
+
+  # chown the installation to $user
+  #file { $install_dir :
+  #  owner   => $user,
+  #  group   => $user,
+  #  recurse => true,
+  #  require => Exec["${artifact_id}-${version}"],
+  #}
 
 }
