@@ -35,8 +35,8 @@ class fedora_repository (
     nexus_server => $nexus_server,
     nexus_port   => $nexus_port,
   }
-  #class { 'fedora_repository::service' :
-  #  user => $user,
-  #}
+  class { 'fedora_repository::service' :
+    user => $user,
+  }
 
 }
