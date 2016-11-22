@@ -14,13 +14,11 @@ class fedora_repository::params {
   $artifact_id      = 'fcrepo-installer'
   $group_id         = 'org.fcrepo'
   $installed        = 'present'
-  #$nexus_server     = undef
   $nexus_server     = undef
   $nexus_port       = '8081'
   $stage_dir        = '/tmp'
   $timeout          = '300'
-  #$user             = 'fedora'
-  $user             = 'root'
+  $user             = 'fedora'
   $install_dir      = "/opt/${user}"
-  $version          = '3.7.1'
+  $version          = '3.7.0'
 }
