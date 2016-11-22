@@ -29,19 +29,19 @@ class fedora_repository::install (
 ) inherits fedora_repository::params {
 
   # add the user
-  #user { $user :
-  #  ensure  => $installed,
-  #  comment => $comment,
-  #  home    => $install_dir,
-  #}
-
-  file { $install_dir :
-    #ensure  => directory,
-    #owner => $user,
-    #owner => $user,
-    group => 'root',
-    group => 'root',
+  user { $user :
+    ensure  => $installed,
+    comment => $comment,
+    home    => $install_dir,
   }
+
+  #file { $install_dir :
+  #  #ensure  => directory,
+  #  #owner => $user,
+  #  #group => $user,
+  #  owner => 'root',
+  #  group => 'root',
+  #}
 
 
   ## Download the artifact
@@ -81,6 +81,7 @@ class fedora_repository::install (
     #cwd        => $stage_dir,
     cwd         => '/tmp',
     command     => "/etc/alternatives/java -jar ${stage_dir}/${artifact_id}-${version}.jar ${stage_dir}/install.properties",
+    #command     => "/usr/lib/jvm/jre-1.7.0-openjdk.x86_64/bin/java -jar ${stage_dir}/${artifact_id}-${version}.jar ${stage_dir}/install.properties",
     #command     => "/etc/alternatives/java -jar /tmp/fcrepo-installer-3.7.1.jar /tmp/install.properties",
     creates     => "${install_dir}/tomcat",
     environment => ['JAVA_HOME=/etc/alternatives/java', "FEDORA_HOME=${install_dir}","CATALINA_HOME=${install_dir}/tomcat"],
