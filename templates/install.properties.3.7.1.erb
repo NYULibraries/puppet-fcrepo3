@@ -1,0 +1,36 @@
+#Install Options
+#Sun Nov 06 11:46:19 EST 2016
+keystore.file=<%= @keystore_file %>
+ri.enabled=<%= @ri_enabled %>
+messaging.enabled=<%= @messaging_enabled %>
+apia.auth.required=<%= @apia_auth_required %>
+database.jdbcDriverClass=<%= @database_jdbcdriverclass %>
+upstream.auth.enabled=<%= @upstream_auth_enabled %>
+tomcat.ssl.port=<%= @tomcat_ssl_port %>
+ssl.available=<%= @ssl_available %>
+#database.jdbcURL=jdbc\:mysql\://localhost/fedora3?useUnicode\=true&amp;characterEncoding\=UTF-8&amp;autoReconnect\=true
+database.jdbcURL=jdbc\:mysql\://<%= @jdbc_host %>/fedora3?useUnicode\=true&amp;characterEncoding\=UTF-8&amp;autoReconnect\=true
+database.password=<%= @database_password %>
+keystore.type=<%= @keystore_type %>
+database.mysql.driver=<%= @database_mysql_driver %>
+database.username=<%= @database_username %>
+fesl.authz.enabled=<%= @fesl_authz_enabled %>
+tomcat.shutdown.port=<%= @tomcat_shutdown_prot %>
+deploy.local.services=<%= @deploy_local_servcies %>
+xacml.enabled=<%= @xacml_enabled %>
+database.mysql.jdbcDriverClass=<%= @database_mysql_jdbcdriverclass %>
+tomcat.http.port=<%= @tomcat_http_port %>
+fedora.serverHost=<%= fedora_serverhost %>
+database=<%= @database %>
+database.driver=<%= @database_driver %>
+fedora.serverContext=<%= @fedora_servercontext %>
+keystore.password=<%= @keystore_password %>
+llstore.type=<%= @llstore_type %>
+tomcat.home=<%= @tomcat_home %>
+database.mysql.jdbcURL=jdbc\:mysql\://<%= @jdbc_host %>/fedora3?useUnicode\=true&amp;characterEncoding\=UTF-8&amp;autoReconnect\=true
+fedora.home=<%= @fedora_home %>
+install.type=<%= @install_type %>
+servlet.engine=<%= @servelet_engine %>
+apim.ssl.required=<%= @apim_ssl_required %>
+fedora.admin.pass=<%= @fedora_admin_pass %>
+apia.ssl.required=<%= @apia_ssl_required %>
