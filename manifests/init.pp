@@ -1,13 +1,13 @@
-# == Class: fedora_repository
+# == Class: fcrepo3
 #
 #
 # To install
 #
-# include fedora_repository
+# include fcrepo3
 #
 # To uninstall,
 #   
-#   class { fedora_repository :
+#   class { fcrepo3 :
 #     installed => absent,
 #   }
 #
@@ -20,22 +20,22 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class fedora_repository (
-  $installed    = $fedora_repository::params::installed,
-  $nexus_server = $fedora_repository::params::nexus_server,
-  $nexus_port   = $fedora_repository::params::nexus_port,
-  $user         = $fedora_repository::params::user,
-  $version      = $fedora_repository::params::version,
-) inherits fedora_repository::params {
+class fcrepo3 (
+  $installed    = $fcrepo3::params::installed,
+  $nexus_server = $fcrepo3::params::nexus_server,
+  $nexus_port   = $fcrepo3::params::nexus_port,
+  $user         = $fcrepo3::params::user,
+  $version      = $fcrepo3::params::version,
+) inherits fcrepo3::params {
 
-  class { 'fedora_repository::install' :
+  class { 'fcrepo3::install' :
     group_id     => $group_id,
     artifact_id  => $artifact_id,
     version      => $version,
     nexus_server => $nexus_server,
     nexus_port   => $nexus_port,
   }
-  class { 'fedora_repository::service' :
+  class { 'fcrepo3::service' :
     user => $user,
   }
 

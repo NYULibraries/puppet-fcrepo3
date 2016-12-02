@@ -1,6 +1,6 @@
-# == Class: fedora_repository
+# == Class: fcrepo3
 #
-# Full description of class fedora_repository here.
+# Full description of class fcrepo3 here.
 #
 # === Authors
 #
@@ -14,19 +14,19 @@
 # command to download from nexus
 # wget "http://172.28.128.11:8081/nexus/service/local/artifact/maven/content?r=central&g=org.fcrepo&a=fcrepo-installer&v=3.7.1" --content-disposition
 #
-class fedora_repository::install (
-  $comment          = $fedora_repository::params::comment,
-  $group_id         = $fedora_repository::params::group_id,
-  $artifact_id      = $fedora_repository::params::artifact_id,
-  $version          = $fedora_repository::params::version,
-  $nexus_server     = $fedora_repository::params::nexus_server,
-  $nexus_port       = $fedora_repository::params::nexus_port,
-  $install_dir      = $fedora_repository::params::install_dir,
-  $stage_dir        = $fedora_repository::params::stage_dir,
-  $timeout          = $fedora_repository::params::timeout,
-  $user             = $fedora_repository::params::user,
-  $user_ensure      = $fedora_repository::params::user_ensure,
-) inherits fedora_repository::params {
+class fcrepo3::install (
+  $comment          = $fcrepo3::params::comment,
+  $group_id         = $fcrepo3::params::group_id,
+  $artifact_id      = $fcrepo3::params::artifact_id,
+  $version          = $fcrepo3::params::version,
+  $nexus_server     = $fcrepo3::params::nexus_server,
+  $nexus_port       = $fcrepo3::params::nexus_port,
+  $install_dir      = $fcrepo3::params::install_dir,
+  $stage_dir        = $fcrepo3::params::stage_dir,
+  $timeout          = $fcrepo3::params::timeout,
+  $user             = $fcrepo3::params::user,
+  $user_ensure      = $fcrepo3::params::user_ensure,
+) inherits fcrepo3::params {
 
   # add the user
   user { $user :

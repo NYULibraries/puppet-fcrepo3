@@ -1,5 +1,5 @@
 #
-define fedora_repository::remote_artifact(
+define fcrepo3::remote_artifact(
   $artifact_id=undef,
   $group_id=undef,
   $nexus_server=undef,

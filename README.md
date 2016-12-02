@@ -48,17 +48,17 @@ etc.), mention it here.
 
 To install Fedora3.
 
-    include fedora_repository
+    include fcrepo3
 
 By default this will install fedora 3.7.1, retrieving the artifact from MAven Central. To install Fedora 3.8 you can do the following,
 
-    class { 'fedora_repository' :
+    class { 'fcrepo3' :
       version => '3.8.1',
     }
 
 To pull the artifact from a local Nexus server,
 
-    class { 'fedora_repository' :
+    class { 'fcrepo3' :
       nexus_server => 'nexus.example.edu',
       nexus_port   => '8081',
     }

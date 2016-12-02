@@ -1,12 +1,12 @@
 {
-  "name": "NYULibraries/fedora_repository",
+  "name": "NYULibraries/puppet-fcrepo3",
   "version": "0.1.0",
   "author": "Flannon Jackson",
-  "summary": "Manage fedora repo",
+  "summary": "Manage fedora3 repository",
   "license": "Apache 2.0",
-  "source": "https://github.com/NYULibraries/fedora_repository",
-  "project_page": "https://github.com/NYULibraries/fedora_repository",
-  "issues_url": "https://github.com/NYULibraries/fedora_repository/issues",
+  "source": "https://github.com/NYULibraries/puppet-fcrepo3",
+  "project_page": "https://github.com/NYULibraries/puppet-fcrepo3",
+  "issues_url": "https://github.com/NYULibraries/puppet-fcrepo3/issues",
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
     {"name":"puppetlabs-java","version_requirement":">= 1.6.0"}

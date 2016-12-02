@@ -1,7 +1,7 @@
 #
-class fedora_repository::service (
-  $user = $fedora_repository::params::user,
-) inherits fedora_repository::params {
+class fcrepo3::service (
+  $user = $fcrepo3::params::user,
+) inherits fcrepo3::params {
 
   # install the service script
   file { "/etc/init.d/${user}_tomcat" :

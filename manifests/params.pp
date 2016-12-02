@@ -1,6 +1,6 @@
-# == Class: fedora_repository
+# == Class: fcrepo3
 #
-# Full description of class fedora_repository here.
+# Full description of class fcrepo3 here.
 #
 # === Authors
 #
@@ -10,7 +10,7 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class fedora_repository::params {
+class fcrepo3::params {
   $artifact_id      = 'fcrepo-installer'
   $group_id         = 'org.fcrepo'
   $installed        = 'present'
