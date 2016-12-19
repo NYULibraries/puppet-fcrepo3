@@ -38,8 +38,8 @@ class fcrepo3::install (
   file { $install_dir :
     #ensure  => directory,
     #owner => $user,
-    #owner => $user,
-    group => 'root',
+    #group => $user,
+    owner => 'root',
     group => 'root',
   }
 
