@@ -20,7 +20,7 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class fedora_repository (
+class fcrepo3 (
   $installed    = $fedora_repository::params::installed,
   $nexus_server = $fedora_repository::params::nexus_server,
   $nexus_port   = $fedora_repository::params::nexus_port,

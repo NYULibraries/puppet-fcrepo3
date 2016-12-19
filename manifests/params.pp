@@ -10,7 +10,7 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class fedora_repository::params {
+class fcrepo3::params {
   $artifact_id      = 'fcrepo-installer'
   $group_id         = 'org.fcrepo'
   $installed        = 'present'

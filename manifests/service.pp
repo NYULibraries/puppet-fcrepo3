@@ -1,5 +1,5 @@
 #
-class fedora_repository::service (
+class fcrepo3::service (
   $user = $fedora_repository::params::user,
 ) inherits fedora_repository::params {
 

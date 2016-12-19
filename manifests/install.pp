@@ -14,7 +14,7 @@
 # command to download from nexus
 # wget "http://172.28.128.11:8081/nexus/service/local/artifact/maven/content?r=central&g=org.fcrepo&a=fcrepo-installer&v=3.7.1" --content-disposition
 #
-class fedora_repository::install (
+class fcrepo3::install (
   $comment          = $fedora_repository::params::comment,
   $group_id         = $fedora_repository::params::group_id,
   $artifact_id      = $fedora_repository::params::artifact_id,
