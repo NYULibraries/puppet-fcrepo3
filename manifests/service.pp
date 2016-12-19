@@ -1,6 +1,6 @@
 #
 class fcrepo3::service (
-  $user = $fedora_repository::params::user,
+  $user = $fcrepo3,
 ) inherits fedora_repository::params {
 
   # install the service script
